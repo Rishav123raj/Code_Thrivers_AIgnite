@@ -1,0 +1,63 @@
+/* UserProfileForm.css */
+.profile-form-container {
+    padding: 2rem;
+    max-width: 700px;
+    margin: auto;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .profile-form h2 {
+    text-align: center;
+    color: #2b7a0b;
+  }
+  
+  .profile-form input,
+  .profile-form select,
+  .profile-form button {
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .label-multi {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  button {
+    background-color: #2b7a0b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #24690b;
+  }
+  
+  .recommend-btn {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  .recommendation-response {
+    margin-top: 2rem;
+    background-color: #e1f5e2;
+    padding: 1.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #2a4d1c;
+    overflow-y: hidden;
+  }

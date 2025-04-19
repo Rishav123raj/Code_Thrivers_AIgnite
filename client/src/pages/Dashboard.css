@@ -1,0 +1,218 @@
+.dashboard-container {
+  padding: 40px 5%;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #f9fdfb, #e8f5e9);
+  color: #222;
+}
+
+.intro-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.highlight {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.intro-section p {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: #555;
+}
+
+.features-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-bottom: 50px;
+}
+
+.feature-card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card h2 {
+  margin-bottom: 10px;
+  color: #2e7d32;
+}
+
+.why-section {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+}
+
+.why-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.why-section li {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+.cta-section {
+  text-align: center;
+}
+
+.start-btn {
+  margin-top: 20px;
+  background-color: #2e7d32;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.start-btn:hover {
+  background-color: #1b5e20;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+.fade-in-delay {
+  animation: fadeIn 1s ease 0.5s forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.8s ease forwards;
+}
+
+.zoom-in {
+  animation: zoomIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ========== Why EcoShop Section (Modern Glass Effect + Scroll) ========== */
+.why-section {
+  margin: 80px 0;
+  padding: 60px 5%;
+  background: radial-gradient(circle at top left, #eaffec, #f6fff9);
+  border-radius: 30px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 1.2s ease-in-out;
+}
+
+.why-section h2 {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 700;
+  color: #1e4620;
+  margin-bottom: 40px;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.why-cards {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 24px;
+  padding-bottom: 10px;
+}
+
+.why-cards::-webkit-scrollbar {
+  height: 6px;
+}
+.why-cards::-webkit-scrollbar-thumb {
+  background-color: #b0dab7;
+  border-radius: 10px;
+}
+.why-cards::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.why-card {
+  min-width: 260px;
+  flex: 0 0 auto;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 24px;
+  scroll-snap-align: start;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.4s ease, background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.why-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.why-card::before {
+  content: "✨";
+  font-size: 32px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 0.2;
+}
+
+.why-card span {
+  font-size: 20px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+  color: #2e7d32;
+}
+.why-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.animated-headline {
+  display: inline-block;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 16px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.animated-headline span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideIn 0.4s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

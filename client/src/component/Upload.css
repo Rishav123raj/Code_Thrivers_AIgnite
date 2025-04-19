@@ -1,0 +1,90 @@
+.upload-container {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.upload-container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.upload-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.scanner-box,
+.result-box {
+  flex: 1;
+  min-width: 300px;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+.scanner-box h2,
+.result-box h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.dropzone {
+  border: 2px dashed #d1d5db;
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  color: #6b7280;
+  margin-top: 1rem;
+}
+
+.upload-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.upload-btn,
+.camera-btn {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.upload-btn:hover,
+.camera-btn:hover {
+  background-color: #eef2f7;
+}
+
+.analysis-placeholder {
+  margin-top: 1rem;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 10px;
+  text-align: center;
+  color: #9ca3af;
+}
+
+.analysis-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .upload-sections {
+    flex-direction: column;
+  }
+}
