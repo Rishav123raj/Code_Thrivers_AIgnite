@@ -83,3 +83,51 @@ smartcart-ai/
 ├── assets/                 # UI assets & receipt samples
 ├── README.md
 └── .env.example            # Environment variable template
+```
+
+## ⚙️ Installation & Setup
+
+# Clone the repository
+git clone https://github.com/Rishav123raj/Code_Thrivers_AIgnite.git
+cd Code_Thrivers_AIgnite
+
+# Setup backend
+cd server
+npm install
+npm run dev
+
+# Setup frontend
+cd ../client
+npm install
+npm start
+
+🛠️ Ensure MongoDB and environment variables are properly configured.
+
+🛤️ Roadmap
+ MVP with core features
+
+ Advanced receipt parsing with NLP
+
+ Integration with Alexa/Google Assistant
+
+ Gamification & reward system for sustainable shopping
+
+ Multi-user household support
+
+ Inventory prediction for businesses
+
+## 🤝 Contributing
+We welcome contributions! Please follow these steps:
+
+Fork the repo
+
+Create a feature branch (git checkout -b feature-name)
+
+Commit your changes (git commit -m "Add feature")
+
+Push to the branch (git push origin feature-name)
+
+Create a Pull Request ✅
+
+## 👨‍💻 Authors
+Made with AI by Code_Thrivers
