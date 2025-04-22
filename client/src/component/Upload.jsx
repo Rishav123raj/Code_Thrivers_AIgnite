@@ -31,7 +31,7 @@ function Upload() {
 
     try {
       const res = await axios.post('/api/ocr/scan', formData);
-      setResponse(res.data?.geminiResponse || 'No response');
+      setResponse(res.data?.formattedResponse || 'No response');
     } catch (error) {
       console.error("Error uploading file:", error);
       setResponse('Failed to upload or process receipt');

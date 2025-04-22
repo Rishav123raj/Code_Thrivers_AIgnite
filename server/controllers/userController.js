@@ -20,21 +20,42 @@ exports.getShoppingRecommendations = async (req, res) => {
     const { name, shoppingFrequency, dietaryPreference, budget, categoryPriorities, packaging } = req.body;
     
     const geminiPrompt = `
-      Based on the following user preferences, recommend shopping items:
-      Name: ${name}
-      Shopping Frequency: ${shoppingFrequency}
-      Dietary Preference: ${dietaryPreference}
-      Budget: ₹${budget}
-      Category Priorities: ${categoryPriorities.join(', ')}
-      Preferred Packaging: ${packaging}
+      Based on the following user preferences, recommend shopping items and provide actionable suggestions:  
 
-    Provide shopping behavior recommendations that are:
-    1. Environmentally sustainable
-    2. Budget-friendly
-    3. Tailored to the user's lifestyle
-    4. Focused on reducing food and packaging waste
-    5. Offer product category and packaging alternatives
-    6. Encourage community and local support if applicable
+**User Profile:**  
+- **Name:** ${name}  
+- **Shopping Frequency:** ${shoppingFrequency}  
+- **Dietary Preference:** ${dietaryPreference}  
+- **Budget:** ₹${budget}  
+- **Category Priorities:** ${categoryPriorities.join(', ')}  
+- **Preferred Packaging:** ${packaging}  
+
+**Provide recommendations in a structured bullet-point format with clear sections:**  
+
+### **Recommended Shopping Items:**  
+- (List specific products or categories tailored to preferences)  
+- Prioritize local, seasonal, or sustainable options where applicable.  
+
+### **Packaging & Waste Reduction Tips:**  
+- Suggest eco-friendly alternatives (e.g., bulk bins, reusable containers).  
+- Avoid single-use plastics by recommending X, Y, Z.  
+
+### **Budget-Friendly Strategies:**  
+- Compare cost-effective alternatives (e.g., store brands, bulk purchases).  
+- Highlight seasonal discounts or local farmer’s markets.  
+
+### **Lifestyle Adjustments for Sustainability:**  
+- Tips to align shopping habits with frequency (e.g., meal planning for infrequent shoppers).  
+- Ways to reduce food waste (e.g., preservation techniques, portioning).  
+
+### **Community & Local Support (if applicable):**  
+- Suggest nearby cooperatives, zero-waste stores, or local brands.  
+
+**Keep recommendations:**  
+1. Environmentally sustainable  
+2. Budget-conscious  
+3. Personalized to user preferences  
+4. Actionable and easy to follow  
 `;
 
     const geminiResponse = await sendToGemini(geminiPrompt);
