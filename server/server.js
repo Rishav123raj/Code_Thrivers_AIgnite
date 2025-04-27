@@ -22,7 +22,9 @@ mongoose.connect(process.env.MONGO_URI, {
 // Routes
 const userRoutes = require('./routes/userRoutes');
 const ocrRoutes = require('./routes/ocrRoutes');
+const userDetailRoutes = require('./routes/userDetailRoutes'); // Import userDetailRoutes
 
+app.use('/api', userDetailRoutes);       // e.g. /api/user/signup
 app.use('/api', userRoutes);           // e.g. /api/user/profile
 app.use('/api/ocr', ocrRoutes);        // e.g. /api/ocr/upload
 
