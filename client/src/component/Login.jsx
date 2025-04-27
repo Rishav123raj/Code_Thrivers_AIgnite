@@ -1,6 +1,5 @@
-// src/pages/Login.jsx
-
 import React, { useState } from 'react';
+import axios from 'axios';
 import './Login.css';
 
 const Login = ({ onLoginSuccess }) => {
@@ -8,6 +7,7 @@ const Login = ({ onLoginSuccess }) => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,18 +17,32 @@ const Login = ({ onLoginSuccess }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Logging in user:', formData);
-    // Add real authentication logic here (API call etc.)
 
-    onLoginSuccess(); // 👉 After successful login, call parent function to update navbar
+    try {
+      const res = await axios.post('http://localhost:5000/api/user/login', formData);
+      console.log('Login successful:', res.data);
+
+      localStorage.setItem('token', res.data.token);  // Save token if needed later
+
+      setError('');
+      onLoginSuccess();  // Trigger onLoginSuccess to update the authentication state
+    } catch (err) {
+      if (err.response && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
+    }
   };
 
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Welcome Back 🌿</h2>
+
+        {error && <div className="error">{error}</div>}
 
         <input
           type="email"

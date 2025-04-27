@@ -12,6 +12,7 @@ import Userpref from './pages/Userpref';
 
 function App() {
   const [activeSection, setActiveSection] = useState('dashboard');
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Add authentication state
 
   const renderSection = () => {
     switch (activeSection) {
@@ -23,23 +24,26 @@ function App() {
         return <Profile />;
       case 'recommendations':
         return <Recommendation />;
-      case 'insights' :
+      case 'insights':
         return <Insights />;
       case 'userpref':
-        return <Userpref />; 
+        return <Userpref />;
       case 'signup':
         return (
-            <Signup
-              onSignupSuccess={() => setActiveSection('login')}
-              onGoToLogin={() => setActiveSection('login')}
-            />
-          );
+          <Signup
+            onSignupSuccess={() => setActiveSection('login')}
+            onGoToLogin={() => setActiveSection('login')}
+          />
+        );
       case 'login':
         return (
-            <Login
-              onLoginSuccess={() => setActiveSection('dashboard')}
-            />
-          );
+          <Login
+            onLoginSuccess={() => {
+              setActiveSection('dashboard');
+              setIsAuthenticated(true); // Update authentication status
+            }}
+          />
+        );
       default:
         return <Dashboard />;
     }
@@ -47,7 +51,7 @@ function App() {
 
   return (
     <div>
-      <Navbar onSectionChange={setActiveSection} />
+      <Navbar onSectionChange={setActiveSection} isAuthenticated={isAuthenticated} /> {/* Pass the auth status */}
       {renderSection()}
     </div>
   );
