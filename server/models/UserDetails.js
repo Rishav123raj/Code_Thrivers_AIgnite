@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-}, { timestamps: true });
+  phone: { 
+    type: String 
+  },
+}, 
+{ timestamps: true });
 
 module.exports = mongoose.model('UserDetails', userSchema);

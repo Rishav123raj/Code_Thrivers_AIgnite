@@ -72,4 +72,35 @@ const loginUser = async (req, res) => {
     }
   };
   
-  module.exports = { signupUser, loginUser };
+
+  // Update User Controller
+  const updateUser = async (req, res) => {
+    const { phone } = req.body;  // receiving phone number from the frontend form
+    const userId = req.params.id;
+  
+    try {
+      const user = await UserDetails.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      user.phone = phone; // update only the phone number
+  
+      await user.save();
+  
+      res.json({
+        message: 'Phone number updated successfully!',
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,   // newly added
+        },
+      });
+    } catch (error) {
+      console.error('Update phone error:', error.message);
+      res.status(500).send('Server Error');
+    }
+  };
+  
+  module.exports = { signupUser, loginUser, updateUser }; 
