@@ -4,6 +4,7 @@ import './Login.css';
 
 const Login = ({ onLoginSuccess }) => {
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
   });
@@ -21,13 +22,22 @@ const Login = ({ onLoginSuccess }) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:5000/api/user/login', formData);
+      const loginData = {
+        email: formData.email,
+        password: formData.password,
+      };
+
+      const res = await axios.post('http://localhost:5000/api/user/login', loginData);
       console.log('Login successful:', res.data);
 
-      localStorage.setItem('token', res.data.token);  // Save token if needed later
+      // Save token
+      localStorage.setItem('token', res.data.token);
+
+      // Save user info (name + email) locally
+      localStorage.setItem('user', JSON.stringify({ name: formData.name, email: formData.email }));
 
       setError('');
-      onLoginSuccess();  // Trigger onLoginSuccess to update the authentication state
+      onLoginSuccess();  // Trigger onLoginSuccess to update authentication state
     } catch (err) {
       if (err.response && err.response.data.message) {
         setError(err.response.data.message);
@@ -43,6 +53,15 @@ const Login = ({ onLoginSuccess }) => {
         <h2>Welcome Back 🌿</h2>
 
         {error && <div className="error">{error}</div>}
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Full Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
 
         <input
           type="email"

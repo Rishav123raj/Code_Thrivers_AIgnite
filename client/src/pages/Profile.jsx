@@ -3,6 +3,8 @@ import './Profile.css';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('profile'); // Assuming you're managing active tabs
+  const user = JSON.parse(localStorage.getItem('user')) || {};
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || '');
 
   return (
     <div className="profile-container">
@@ -10,7 +12,6 @@ const Profile = () => {
 
       <div className="profile-tabs">
         <button className={activeTab === 'profile' ? 'active-tab' : ''} onClick={() => setActiveTab('profile')}>👤 Profile</button>
-        <button className={activeTab === 'preferences' ? 'active-tab' : ''} onClick={() => setActiveTab('preferences')}>⚙️ Preferences</button>
         <button className={activeTab === 'goals' ? 'active-tab' : ''} onClick={() => setActiveTab('goals')}>🎯 Goals</button>
         <button className={activeTab === 'alerts' ? 'active-tab' : ''} onClick={() => setActiveTab('alerts')}>🔔 Alerts</button>
       </div>
@@ -23,9 +24,7 @@ const Profile = () => {
     <div className="profile-card">
       <h2>👤 Your Account</h2>
       <div className="avatar"></div>
-      <h3>Alex Johnson</h3>
-      <p className="subtext">Member since April 2025</p>
-
+      <h3> {user.name} </h3>
       <div className="level-info">
         <div className="level-label">
           <span>EcoShop Level</span>
@@ -50,107 +49,55 @@ const Profile = () => {
       <h2>📋 Personal Information</h2>
       <p className="subtext">Update your personal details</p>
 
-      <form className="profile-form">
+      <form className="profile-form"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          try {
+            const res = await fetch('http://localhost:5000/api/user/update', {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': localStorage.getItem('token'), // Assuming you store token in localStorage
+              },
+              body: JSON.stringify({ phoneNumber }),
+            });
+    
+            const data = await res.json();
+    
+            if (res.ok) {
+              alert('✅ Changes saved successfully!');
+              console.log('Updated User:', data);
+              // Optionally update localStorage if you fetch updated user data here
+            } else {
+              alert(`❌ Error: ${data.message}`);
+            }
+          } catch (err) {
+            console.error(err);
+            alert('❌ Something went wrong!');
+          }
+        }}
+      >
         <label>Full Name</label>
-        <input type="text" defaultValue="Alex Johnson" />
+        <input type="text" value={user.name || ''} readOnly />
 
         <label>Email Address</label>
-        <input type="email" defaultValue="alex.johnson@example.com" />
+        <input type="email" value={user.email || ''} readOnly />
 
         <label>Phone Number</label>
-        <input type="tel" defaultValue="(555) 123-4567" />
+        <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
 
-        <label>Password</label>
-        <input type="password" value="********" readOnly />
-        <p className="small-note">
-          Last changed 30 days ago. <a href="#">Change password</a>
-        </p>
+        <div className="account-actions">
+        <button type="submit" className="btn save">💾 Save Changes</button>
+        </div>
       </form>
 
       <div className="account-actions">
-        <button className="btn save">💾 Save Changes</button>
-        <button className="btn export">📤 Export My Data</button>
         <button className="btn delete">⚠️ Delete Account</button>
       </div>
     </div>
   </div>
 )}
 
-        {/* Preferences Section */}
-        {activeTab === 'preferences' && (
-  <div className="profile-card">
-    <h2>⚙️ Shopping Preferences</h2>
-    <p className="subtext">Customize your preferences to get better recommendations</p>
-
-    {/* Food Preferences */}
-    <div className="preference-section">
-      <label><strong>Food Preferences & Dietary Restrictions</strong></label>
-      <input type="text" defaultValue="Mostly vegetarian, no dairy" />
-    </div>
-
-    {/* Preferred Stores */}
-    <div className="preference-section">
-      <label><strong>Preferred Store Locations</strong></label>
-      <div className="store-tags">
-        <span className="store-tag">Whole Foods ×</span>
-        <span className="store-tag">Trader Joe's ×</span>
-        <span className="store-tag">Safeway ×</span>
-        <span className="store-tag add">+ Add Store</span>
-      </div>
-    </div>
-
-    {/* Sustainability Preferences */}
-    <div className="preference-section">
-      <label><strong>Sustainability Priorities</strong></label>
-
-      <div className="toggle-level">
-        <div className="toggle-label">
-          <input type="checkbox" defaultChecked />
-          <span>Prioritize Organic Products</span>
-        </div>
-        <span className="level">High</span>
-      </div>
-
-      <div className="toggle-level">
-        <div className="toggle-label">
-          <input type="checkbox" defaultChecked />
-          <span>Prefer Local Products</span>
-        </div>
-        <span className="level">High</span>
-      </div>
-
-      <div className="toggle-level">
-        <div className="toggle-label">
-          <input type="checkbox" />
-          <span>Minimize Packaging</span>
-        </div>
-        <span className="level">Medium</span>
-      </div>
-
-      <div className="toggle-level">
-        <div className="toggle-label">
-          <input type="checkbox" />
-          <span>Low Carbon Footprint</span>
-        </div>
-        <span className="level">Low</span>
-      </div>
-    </div>
-
-    {/* Price Sensitivity */}
-    <div className="preference-section">
-      <label><strong>Price Sensitivity</strong></label>
-      <p className="subtext">Balance between saving money and sustainability</p>
-      <input type="range" min="1" max="3" defaultValue="2" className="slider" />
-      <div className="slider-labels">
-        <span>Save Money</span>
-        <span>Balance</span>
-        <span>Sustainability</span>
-      </div>
-    </div>
-
-    <button className="btn save" style={{ marginTop: '20px' }}>💾 Save Preferences</button>
-  </div>
-)}
 
 {activeTab === 'goals' && (
   <div className="profile-card">

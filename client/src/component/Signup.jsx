@@ -33,6 +33,10 @@ const Signup = ({ onSignupSuccess, onGoToLogin }) => {
       });
 
       console.log(res.data);
+      localStorage.setItem('user', JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+      }));
       setError('');
       setIsSignedUp(true);
     } catch (err) {
