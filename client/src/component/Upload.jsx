@@ -4,28 +4,31 @@ import './upload.css';
 
 function Upload() {
   const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState('');
   const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Handle file change
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+
+    if (selectedFile) {
+      const fileURL = URL.createObjectURL(selectedFile);
+      setPreview(fileURL);
+    }
   };
 
-  // Handle camera click
   const handleCameraClick = () => {
     alert("Camera functionality not yet implemented.");
   };
 
-  // Handle file upload and OCR API request
   const handleUpload = async () => {
     if (!file) {
       alert("Please select a file first.");
       return;
     }
 
-    setIsLoading(true); // Set loading state
-
+    setIsLoading(true);
     const formData = new FormData();
     formData.append('receipt', file);
 
@@ -36,7 +39,7 @@ function Upload() {
       console.error("Error uploading file:", error);
       setResponse('Failed to upload or process receipt');
     } finally {
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
     }
   };
 
@@ -49,17 +52,35 @@ function Upload() {
         <div className="scanner-box">
           <h2>Receipt Scanner</h2>
           <p>Upload or take a photo of your shopping receipt to analyze your purchases</p>
+
+          {/* Dropzone */}
           <div className="dropzone">
-            <div className="upload-icon">📤</div>
-            <p>Drag and drop your receipt or<br />PNG, JPG or PDF up to 10MB</p>
+            {!preview ? (
+              <>
+                <div className="upload-icon">📤</div>
+                <p>Drag and drop your receipt or<br />PNG, JPG or PDF up to 10MB</p>
+              </>
+            ) : (
+              <div className="receipt-preview">
+                {file?.type === 'application/pdf' ? (
+                  <iframe src={preview} width="100%" height="400px" title="PDF Preview" />
+                ) : (
+                  <img src={preview} alt="Receipt preview" className="receipt-image" />
+                )}
+              </div>
+            )}
+
             <div className="button-group">
               <label className="upload-btn">
                 <span>📁 Select File</span>
-                <input type="file" onChange={handleFileChange} hidden />
+                <input type="file" accept="image/*,.pdf" onChange={handleFileChange} hidden />
               </label>
-              <button className="camera-btn" onClick={handleCameraClick}>📷 Use Camera</button>
+              <button className="camera-btn" onClick={handleCameraClick} disabled>
+                📷 Use Camera
+              </button>
             </div>
           </div>
+
           <button onClick={handleUpload} disabled={isLoading}>
             {isLoading ? "Uploading..." : "Upload Receipt"}
           </button>
@@ -71,7 +92,6 @@ function Upload() {
           <div className="analysis-placeholder">
             <div className="analysis-icon">🔄</div>
             <p>{isLoading ? "Processing..." : (response || "No data to display yet")}</p>
-            
           </div>
         </div>
       </div>
