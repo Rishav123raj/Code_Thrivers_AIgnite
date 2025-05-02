@@ -45,36 +45,31 @@ exports.handleReceiptUpload = async (req, res) => {
     console.log("OCR Text:", text);
 
     const prompt = `
-    You are a helpful assistant. Analyze the following shopping receipt and provide clear, readable recommendations in a structured format.
+    You are a smart and eco-conscious assistant. Analyze the following shopping receipt and provide a structured, user-friendly summary with actionable suggestions based on:
 
-    🧾 Receipt Analysis & Smart Suggestions
+    🌱 Carbon Footprint  
+    🥗 Nutritional Value  
+    🛍️ Purchase Necessity & Sustainability  
 
     📌 Instructions:
-      - Start with a short summary (1–2 lines).
-      - Divide suggestions into the following sections:
-
+      - Start with a **brief summary** (1–2 lines) of the overall receipt (e.g., healthy, high-impact, budget-friendly).
+      - Provide recommendations under **clearly separated sections**:
+  
     ✅ Healthier Alternatives  
-    💰 Cheaper Alternatives  
-    🚫 Unnecessary Purchases  
+    💰 Cheaper or Sustainable Alternatives  
+    🌍 Lower Carbon Footprint Swaps  
+    🚫 Unnecessary or High-Impact Purchases  
 
     Format:
       - Each section header on its own line.
       - Each suggestion on a **new line**, starting with a bullet (•).
       - Use **bold** for item names.
-      - Add **TWO line breaks** between bullet points and between sections to improve readability.
-      - Keep each suggestion **short, friendly, and helpful**.
+      - Add **TWO line breaks** between bullet points and between sections for readability.
+      - Keep tone friendly, helpful, and non-judgmental.
 
-    Example:
-    ✅ Healthier Alternatives  
-      • **ITEM NAME**: Replace with this for better health.
+    ✨ Tip: Suggest plant-based, local, seasonal, or unpackaged options when relevant. Mention estimated impact reduction if possible.
 
-    💰 Cheaper Alternatives  
-      • **ITEM NAME**: Try this cheaper option.
-
-    🚫 Unnecessary Purchases  
-      • **ITEM NAME**: This might not be essential.
-
-    Now, analyze this receipt and provide your structured suggestions:
+    Now, analyze this receipt and provide structured suggestions:
     ${text}
     `;
     

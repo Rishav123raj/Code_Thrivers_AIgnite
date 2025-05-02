@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import jsPDF from 'jspdf';
 import './upload.css';
 
 function Upload() {
@@ -16,6 +17,26 @@ function Upload() {
       const fileURL = URL.createObjectURL(selectedFile);
       setPreview(fileURL);
     }
+  };
+
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+    const lines = response.split('\n');
+    let y = 10;
+  
+    doc.setFont('courier', 'normal');
+    doc.setFontSize(12);
+  
+    lines.forEach((line, index) => {
+      if (y > 280) { // Prevent text from overflowing page
+        doc.addPage();
+        y = 10;
+      }
+      doc.text(line, 10, y);
+      y += 7;
+    });
+  
+    doc.save('receipt_analysis.pdf');
   };
 
   const handleUpload = async () => {
@@ -47,7 +68,7 @@ function Upload() {
         {/* Receipt Scanner */}
         <div className="scanner-box">
           <h2>Receipt Scanner</h2>
-          <p>Upload a photo of your shopping receipt to analyze your purchases</p>
+          <p>Upload your receipt — get instant insights into your spending, savings, and shopping habits</p>
 
           {/* Dropzone */}
           <div className="dropzone">
@@ -91,6 +112,11 @@ function Upload() {
                   <pre>{response || "No data to display yet"}</pre>
             )}
             </div>
+            {response && !isLoading && (
+  <button onClick={handleDownloadPDF}>
+    📄 Download as PDF
+  </button>
+)}
           </div>
         </div>
       </div>
