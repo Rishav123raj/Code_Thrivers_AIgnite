@@ -18,10 +18,6 @@ function Upload() {
     }
   };
 
-  const handleCameraClick = () => {
-    alert("Camera functionality not yet implemented.");
-  };
-
   const handleUpload = async () => {
     if (!file) {
       alert("Please select a file first.");
@@ -51,7 +47,7 @@ function Upload() {
         {/* Receipt Scanner */}
         <div className="scanner-box">
           <h2>Receipt Scanner</h2>
-          <p>Upload or take a photo of your shopping receipt to analyze your purchases</p>
+          <p>Upload a photo of your shopping receipt to analyze your purchases</p>
 
           {/* Dropzone */}
           <div className="dropzone">
@@ -75,9 +71,6 @@ function Upload() {
                 <span>📁 Select File</span>
                 <input type="file" accept="image/*,.pdf" onChange={handleFileChange} hidden />
               </label>
-              <button className="camera-btn" onClick={handleCameraClick} disabled>
-                📷 Use Camera
-              </button>
             </div>
           </div>
 
@@ -91,7 +84,13 @@ function Upload() {
           <h2>Analysis Results</h2>
           <div className="analysis-placeholder">
             <div className="analysis-icon">🔄</div>
-            <p>{isLoading ? "Processing..." : (response || "No data to display yet")}</p>
+            <div className="formatted-response">
+              {isLoading ? (
+                  "Processing..."
+                ) : (
+                  <pre>{response || "No data to display yet"}</pre>
+            )}
+            </div>
           </div>
         </div>
       </div>
