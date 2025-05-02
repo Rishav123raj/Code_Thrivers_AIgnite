@@ -50,31 +50,29 @@ exports.handleReceiptUpload = async (req, res) => {
     🧾 Receipt Analysis & Smart Suggestions
 
     📌 Instructions:
-      - Begin with a short summary (1–2 lines).
+      - Start with a short summary (1–2 lines).
       - Divide suggestions into the following sections:
 
     ✅ Healthier Alternatives  
     💰 Cheaper Alternatives  
     🚫 Unnecessary Purchases  
 
-    - For each section:
-      • Use **bullet points**
-      • Make item names **bold**
-      • Each bullet point should start on a new line
-      • Add real line breaks between bullet points and sections
-      • Keep each recommendation concise and easy to understand
+    Format:
+      - Each section header on its own line.
+      - Each suggestion on a **new line**, starting with a bullet (•).
+      - Use **bold** for item names.
+      - Add **TWO line breaks** between bullet points and between sections to improve readability.
+      - Keep each suggestion **short, friendly, and helpful**.
 
-    🔁 Format each section like this:
+    Example:
+    ✅ Healthier Alternatives  
+      • **ITEM NAME**: Replace with this for better health.
 
-      ✅ Healthier Alternatives  
-        • **ITEM NAME**: Recommendation goes here.  
-        • **ITEM NAME 2**: Another tip.  
+    💰 Cheaper Alternatives  
+      • **ITEM NAME**: Try this cheaper option.
 
-      💰 Cheaper Alternatives  
-        • **ITEM NAME**: Suggest price comparison or quantity review.  
-
-      🚫 Unnecessary Purchases  
-        • **ITEM NAME**: Mention why this item may be unnecessary.  
+    🚫 Unnecessary Purchases  
+      • **ITEM NAME**: This might not be essential.
 
     Now, analyze this receipt and provide your structured suggestions:
     ${text}
