@@ -1,12 +1,46 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #eafaf1, #d5f5e3);
+  font-family: 'Quicksand', 'Segoe UI', sans-serif;
+  color: #1f2937;
+}
+
 .upload-container {
   padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Quicksand', sans-serif;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 20px rgba(0, 128, 0, 0.1);
+  position: relative;
+}
+
+.upload-container::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  background-image: url('/images/leaf-pattern.png'); /* optional subtle leaf pattern */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.03;
+  z-index: -1;
 }
 
 .upload-container h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
+  color: #2e7d32;
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .upload-sections {
@@ -19,30 +53,48 @@
 .result-box {
   flex: 1;
   min-width: 300px;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+  border-left: 6px solid #66bb6a;
+  transition: transform 0.3s ease;
+}
+
+.scanner-box:hover,
+.result-box:hover {
+  transform: scale(1.01);
 }
 
 .scanner-box h2,
 .result-box h2 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
+  color: #388e3c;
 }
 
 .dropzone {
-  border: 2px dashed #d1d5db;
+  border: 2px dashed #a5d6a7;
   border-radius: 10px;
   padding: 2rem;
   text-align: center;
-  color: #6b7280;
+  color: #558b2f;
   margin-top: 1rem;
+  background-color: #f0fdf4;
+  transition: border-color 0.3s ease;
+}
+
+.dropzone:hover {
+  border-color: #66bb6a;
 }
 
 .upload-icon {
   font-size: 2rem;
   margin-bottom: 0.5rem;
+}
+
+.upload-icon::after {
+  content: " 🌿";
 }
 
 .button-group {
@@ -55,18 +107,19 @@
 
 .upload-btn,
 .camera-btn {
-  background: #f9fafb;
-  border: 1px solid #d1d5db;
+  background: #a5d6a7;
+  border: none;
+  color: #1b5e20;
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   transition: background 0.2s ease;
 }
 
 .upload-btn:hover,
 .camera-btn:hover {
-  background-color: #eef2f7;
+  background-color: #81c784;
 }
 
 .analysis-placeholder {
@@ -76,9 +129,8 @@
   border-radius: 10px;
   color: #1f2937;
   text-align: left;
-  font-family: 'Segoe UI', sans-serif;
   line-height: 1.7;
-  white-space: pre-wrap; /* preserves formatting from Gemini */
+  white-space: pre-wrap;
 }
 
 .formatted-response pre {
@@ -94,6 +146,9 @@
   text-align: center;
 }
 
+.analysis-icon::after {
+  content: " 📊";
+}
 
 @media screen and (max-width: 768px) {
   .upload-sections {
