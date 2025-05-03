@@ -113,10 +113,10 @@ function Upload() {
             )}
             </div>
             {response && !isLoading && (
-  <button onClick={handleDownloadPDF}>
-    📄 Download as PDF
-  </button>
-)}
+            <button onClick={handleDownloadPDF}>
+            📄 Download as PDF
+            </button>
+            )}
           </div>
         </div>
       </div>
